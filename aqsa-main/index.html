@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins', sans-serif;
+    }
+
+    body{
+      overflow:hidden;
+      height:100vh;
+      background:radial-gradient(circle at top,#3d1b2f,#120b14,#000);
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      position:relative;
+      color:white;
+    }
+
+    .glow{
+      position:absolute;
+      width:700px;
+      height:700px;
+      background:#ff5f9e;
+      border-radius:50%;
+      filter:blur(180px);
+      opacity:0.25;
+      animation:moveGlow 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes moveGlow{
+      from{transform:translate(-150px,-100px);}
+      to{transform:translate(150px,100px);}
+    }
+
+    .star{
+      position:absolute;
+      width:3px;
+      height:3px;
+      background:white;
+      border-radius:50%;
+      animation:blink 2s infinite;
+    }
+
+    @keyframes blink{
+      0%,100%{opacity:0.2;}
+      50%{opacity:1;}
+    }
+
+    /* FLOATING ELEMENT */
+    .floating{
+      position:absolute;
+      bottom:-50px;
+      animation:float 8s linear infinite;
+      opacity:0.9;
+      z-index:1;
+    }
+
+    @keyframes float{
+      0%{
+        transform:translateY(0) scale(1);
+        opacity:0;
+      }
+
+      20%{
+        opacity:1;
+      }
+
+      100%{
+        transform:translateY(-120vh) scale(1.5) rotate(360deg);
+        opacity:0;
+      }
+    }
+
+    .container{
+      position:relative;
+      z-index:10;
+      width:90%;
+      max-width:800px;
+      padding:45px;
+      border-radius:35px;
+      text-align:center;
+      background:rgba(255,255,255,0.07);
+      backdrop-filter:blur(15px);
+      border:1px solid rgba(255,255,255,0.08);
+      box-shadow:0 0 40px rgba(255,255,255,0.08);
+    }
+
+    .count{
+      font-size:140px;
+      font-weight:700;
+      color:#ffb6d0;
+      text-shadow:0 0 15px #ff8fb1;
+    }
+
+    .hidden{
+      display:none;
+    }
+
+    h1{
+      font-family:'Great Vibes', cursive;
+      font-size:85px;
+      color:#ffb6d0;
+      margin-bottom:15px;
+    }
+
+    .line{
+      width:120px;
+      height:4px;
+      background:linear-gradient(to right,#ff6fa5,#ffd1e3);
+      margin:20px auto;
+      border-radius:10px;
+    }
+
+    .slide-wrapper{
+      position:relative;
+      width:100%;
+      overflow:hidden;
+    }
+
+    .slide{
+      display:none;
+      animation:fade 1s ease;
+    }
+
+    .slide.active{
+      display:block;
+    }
+
+    @keyframes fade{
+      from{
+        opacity:0;
+        transform:translateY(20px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    .slideshow{
+      width:100%;
+      max-width:400px;
+      height:250px;
+      margin:20px auto;
+      border-radius:20px;
+      overflow:hidden;
+      box-shadow:0 0 25px rgba(255,105,180,0.4);
+    }
+
+    .slideshow img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transition:1s;
+    }
+
+    .message{
+      font-size:17px;
+      line-height:2;
+      opacity:0.9;
+      padding:10px 15px;
+    }
+
+    .btn-group{
+      margin-top:25px;
+      display:flex;
+      justify-content:center;
+      gap:15px;
+    }
+
+    button{
+      padding:12px 28px;
+      border:none;
+      border-radius:30px;
+      background:linear-gradient(to right,#ff6fa5,#ffb6d0);
+      color:white;
+      font-size:15px;
+      cursor:pointer;
+      transition:0.3s;
+      box-shadow:0 0 15px rgba(255,105,180,0.5);
+    }
+
+    button:hover{
+      transform:scale(1.08);
+    }
+
+    audio{
+      margin-top:25px;
+      width:100%;
+      max-width:320px;
+    }
+
+    @media(max-width:768px){
+
+      h1{
+        font-size:60px;
+      }
+
+      .count{
+        font-size:90px;
+      }
+
+      .message{
+        font-size:14px;
+      }
+
+      .slideshow{
+        height:220px;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+<div class="glow"></div>
+
+<div class="container">
+
+  <div id="countdown" class="count">3</div>
+
+  <div id="birthday" class="hidden">
+
+    <h1>Happy Birthday ✨</h1>
+
+    <div class="line"></div>
+
+    <!-- SLIDES -->
+    <div class="slide-wrapper">
+
+      <!-- FOTO -->
+      <div class="slide active" id="slide1">
+
+        <div class="slideshow">
+          <img id="slideImg" src="">
+        </div>
+
+      </div>
+
+      <!-- UCAPAN -->
+      <div class="slide" id="slide2">
+
+        <p class="message">
+          happyy levell upp dayy perempuan kuat !!! 
+          perempuan yang selalu tersenyum, perempuan yang 
+          terkadang menjadi seorang komedian untuk dirinya 
+          sendiri dan orang lain, make a wish for ur b'day, 
+          taun ini umur kamu nambah satu tahun lagi kamu 
+          sekarang makin dewasa, apapun yng kamu inginkann 
+          semoga bisa terjadi. terimakasihh sudah bertahan 
+          selama 21 tahun dan itu gabentarr lohh, kmu terlahir 
+          di dunia dari kecill bngtt sekarang udah sebesar inii, 
+          banyakk hal yng kmu udah laluin tapi masih banyak bngt 
+          hal yng belum kmu laluin semakin kamu besarr semakin 
+          banyak jga rintangannyaa but it's okee selamat ulang 
+          tahun ya sekali lagi terimakasih udah jadi manusia kuat 
+          selama ini dan tetap menjadi manusia kuat ceria yang aku kenal,
+          bahagia teruss yaa!!! 💖
+        </p>
+
+      </div>
+
+    </div>
+
+    <!-- BUTTON -->
+    <div class="btn-group">
+      <button onclick="prevSlide()">‹ Prev</button>
+      <button onclick="nextSlide()">Next ›</button>
+    </div>
+
+    <!-- MUSIC -->
+    <audio controls autoplay loop>
+      <source src="https://files.catbox.moe/kt1dpk.mp4" type="audio/mp3">
+    </audio>
+
+  </div>
+
+</div>
+
+<script>
+
+/* COUNTDOWN */
+let count = 3;
+
+const countdown = document.getElementById("countdown");
+const birthday = document.getElementById("birthday");
+
+const timer = setInterval(()=>{
+
+  count--;
+
+  if(count > 0){
+
+    countdown.innerHTML = count;
+
+  }else{
+
+    clearInterval(timer);
+
+    countdown.classList.add("hidden");
+
+    birthday.classList.remove("hidden");
+
+    startSlideshow();
+
+  }
+
+},1000);
+
+
+/* FOTO SLIDESHOW */
+const images = [
+  "https://files.catbox.moe/945d9b.jpeg",
+  "https://files.catbox.moe/0ignby.jpg",
+  "https://files.catbox.moe/78mqpk.jpg",
+  "https://files.catbox.moe/y1s60c.jpg",
+  "https://files.catbox.moe/qbkfsf.jpg"
+];
+
+let index = 0;
+
+function startSlideshow(){
+
+  const img = document.getElementById("slideImg");
+
+  img.src = images[0];
+
+  setInterval(()=>{
+
+    index = (index + 1) % images.length;
+
+    img.style.opacity = 0;
+
+    setTimeout(()=>{
+
+      img.src = images[index];
+
+      img.style.opacity = 1;
+
+    },500);
+
+  },3000);
+
+}
+
+
+/* SLIDE */
+let currentSlide = 1;
+
+function showSlide(num){
+
+  document.querySelectorAll(".slide").forEach(slide=>{
+    slide.classList.remove("active");
+  });
+
+  document.getElementById("slide"+num).classList.add("active");
+
+}
+
+function nextSlide(){
+
+  currentSlide++;
+
+  if(currentSlide > 2){
+    currentSlide = 1;
+  }
+
+  showSlide(currentSlide);
+
+}
+
+function prevSlide(){
+
+  currentSlide--;
+
+  if(currentSlide < 1){
+    currentSlide = 2;
+  }
+
+  showSlide(currentSlide);
+
+}
+
+
+/* FLOATING ELEMENT */
+const floatingItems = ["⭐","🎈","🐱"];
+
+function createFloating(){
+
+  const item = document.createElement("div");
+
+  item.classList.add("floating");
+
+  item.innerHTML = floatingItems[
+    Math.floor(Math.random() * floatingItems.length)
+  ];
+
+  item.style.left = Math.random()*100 + "vw";
+
+  item.style.fontSize = Math.random()*25 + 20 + "px";
+
+  item.style.animationDuration = Math.random()*4 + 5 + "s";
+
+  document.body.appendChild(item);
+
+  setTimeout(()=>{
+    item.remove();
+  },8000);
+
+}
+
+setInterval(createFloating,400);
+
+
+/* STARS BACKGROUND */
+for(let i=0;i<90;i++){
+
+  const star = document.createElement("div");
+
+  star.classList.add("star");
+
+  star.style.left = Math.random()*100+"vw";
+
+  star.style.top = Math.random()*100+"vh";
+
+  star.style.animationDelay = Math.random()*2+"s";
+
+  document.body.appendChild(star);
+
+}
+
+</script>
+
+</body>
+</html>
